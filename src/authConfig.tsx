@@ -1,19 +1,30 @@
-import { PublicClientApplication } from "@azure/msal-browser";  // Importera PublicClientApplication
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
+ */
+
 import { LogLevel } from "@azure/msal-browser";
+
+
+/**
+ * Configuration object to be passed to MSAL instance on creation. 
+ * For a full list of MSAL.js configuration parameters, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
+ */
 
 export const msalConfig = {
   auth: {
     clientId: "9e550a67-68f9-4415-9b71-e6459ed4b756",
-    tenantId: "a21320bb-facd-466b-81b1-df45c6bc6325",
+    authority: "https://login.microsoftonline.com/a21320bb-facd-466b-81b1-df45c6bc6325",
     redirectUri: "http://localhost:5173/",
   },
   cache: {
-    cacheLocation: "sessionStorage",
-    storeAuthStateInCookie: false,
+    cacheLocation: "sessionStorage", // This configures where your cache will be stored
+    storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
   },
   system: {
     loggerOptions: {
-      loggerCallback: (level: LogLevel, message: string, containsPii: boolean) => {
+      loggerCallback: (level: any, message: any, containsPii:any) => {
         if (containsPii) {
           return;
         }
@@ -38,13 +49,20 @@ export const msalConfig = {
   }
 };
 
-// Skapa MSAL-instans och exportera den
-export const msalInstance = new PublicClientApplication(msalConfig);
-
+/**
+ * Scopes you add here will be prompted for user consent during sign-in.
+ * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
+ * For more information about OIDC scopes, visit: 
+ * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
+ */
 export const loginRequest = {
   scopes: ["User.Read"]
 };
 
+/**
+ * Add here the scopes to request when obtaining an access token for MS Graph API. For more information, see:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
+ */
 export const graphConfig = {
   graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
 };

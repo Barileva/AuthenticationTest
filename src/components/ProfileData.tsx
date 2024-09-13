@@ -1,36 +1,22 @@
-import React from "react";
-
-// Definiera typen för MS Graph-data
-interface GraphData {
-  givenName: string;
-  surname: string;
-  userPrincipalName: string;
-  id: string;
-}
-
-// Definiera typen för props
-interface ProfileDataProps {
-  graphData: GraphData;
-}
 
 /**
  * Renders information about the user obtained from MS Graph 
  * @param props
  */
-export const ProfileData: React.FC<ProfileDataProps> = ({ graphData }) => {
+export const ProfileData = (props:any) => {
   return (
     <div id="profile-div">
       <p>
-        <strong>First Name: </strong> {graphData.givenName}
+        <strong>First Name: </strong> {props.graphData.givenName}
       </p>
       <p>
-        <strong>Last Name: </strong> {graphData.surname}
+        <strong>Last Name: </strong> {props.graphData.surname}
       </p>
       <p>
-        <strong>Email: </strong> {graphData.userPrincipalName}
+        <strong>Email: </strong> {props.graphData.userPrincipalName}
       </p>
       <p>
-        <strong>Id: </strong> {graphData.id}
+        <strong>Id: </strong> {props.graphData.id}
       </p>
     </div>
   );

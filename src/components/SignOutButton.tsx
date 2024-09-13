@@ -1,24 +1,23 @@
-import React from "react";
+
 import { useMsal } from "@azure/msal-react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
 /**
- * Renders a sign out button
+ * Renders a sign out button 
  */
-export const SignOutButton: React.FC = () => {
+export const SignOutButton = () => {
   const { instance } = useMsal();
 
-  // Typdefinition för logoutType
-  const handleLogout = (logoutType: "popup" | "redirect") => {
+  const handleLogout = (logoutType:any) => {
     if (logoutType === "popup") {
       instance.logoutPopup({
-        postLogoutRedirectUri: "/", // Används för att omdirigera efter utloggning i popup
-        mainWindowRedirectUri: "/",  // Omdirigerar huvudfönstret efter utloggning
+        postLogoutRedirectUri: "/",
+        mainWindowRedirectUri: "/",
       });
     } else if (logoutType === "redirect") {
       instance.logoutRedirect({
-        postLogoutRedirectUri: "/", // Omdirigerar användaren efter utloggning
+        postLogoutRedirectUri: "/",
       });
     }
   };

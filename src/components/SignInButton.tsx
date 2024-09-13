@@ -1,19 +1,19 @@
-import React from "react";
+
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../authConfig";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+
 
 /**
  * Renders a drop down button with child buttons for logging in with a popup or redirect
  * Note the [useMsal] package 
  */
 
-export const SignInButton: React.FC = () => {
+export const SignInButton = () => {
   const { instance } = useMsal();
 
-  // Typ för loginType (popup eller redirect)
-  const handleLogin = (loginType: "popup" | "redirect") => {
+  const handleLogin = (loginType: any) => {
     if (loginType === "popup") {
       instance.loginPopup(loginRequest).catch((e) => {
         console.log(e);
@@ -24,7 +24,6 @@ export const SignInButton: React.FC = () => {
       });
     }
   };
-
   return (
     <DropdownButton
       variant="secondary"
